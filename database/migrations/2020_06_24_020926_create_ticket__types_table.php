@@ -13,7 +13,7 @@ class CreateTicketTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ticket__types', function (Blueprint $table) {
+        Schema::create('ticket_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre', 50);
             $table->string('descripcion', 150);

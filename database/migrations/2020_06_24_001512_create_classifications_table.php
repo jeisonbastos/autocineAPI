@@ -13,8 +13,8 @@ class CreateClassificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('classification', function (Blueprint $table) {
-            $table->id();
+        Schema::create('classifications', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('siglas',5);
             $table->string('descripcion',200);
             $table->timestamps();

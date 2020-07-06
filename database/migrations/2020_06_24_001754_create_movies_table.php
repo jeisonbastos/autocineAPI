@@ -15,11 +15,11 @@ class CreateMoviesTable extends Migration
     {
         Schema::create('movies', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre',200);
+            $table->string('nombre', 200);
             $table->unsignedInteger('classification_id');
-            $table->boolean('habilitada',false);
+            $table->boolean('habilitada', false);
             $table->text('sinopsis');
-            $table->decimal('puntuacion',2,1,true);
+            $table->decimal('puntuacion', 2, 1, true);
             $table->timestamps();
             #foreign keys
             $table->foreign('classification_id')->references('id')->on('classifications');

@@ -13,7 +13,7 @@ class CreateProductClassificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('product__classifications', function (Blueprint $table) {
+        Schema::create('product_classifications', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre',100);
             $table->timestamps();
