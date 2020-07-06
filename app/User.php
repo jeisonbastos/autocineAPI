@@ -36,4 +36,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //Métodos de relaciones.
+    //Nombre del metodo de la relacion
+    public function role()
+    {
+        return $this->belongsTo('App\Role');
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany('App\Reservation');
+    }
+
 }
