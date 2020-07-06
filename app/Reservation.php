@@ -22,4 +22,12 @@ class Reservation extends Model
         return $this->belongsToMany('App\Product');
     }
 
+    public function calc_iva(){
+        return 0.0;
+    }
+
+    public function calc_total()
+    {
+        return $this->calc_iva() + 1.00;
+    }
 }
