@@ -25,6 +25,7 @@ class LocationSeeder extends Seeder
         $ubicacion->canton = 'Belen';
         $ubicacion->distrito = 'San Antonio';
         $ubicacion->direccion_exacta = 'Centro de Eventos y Entretenimiento Pedregal';
+        $ubicacion->ubicacion_gps = '';
         $ubicacion->capacidad_maxima = 125;
         $ubicacion->save();
 
@@ -34,6 +35,7 @@ class LocationSeeder extends Seeder
         $ubicacion->canton = 'Liberia';
         $ubicacion->distrito = 'Liberia';
         $ubicacion->direccion_exacta = '2.5 Km. carretera a Aeropuerto';
+        $ubicacion->ubicacion_gps = '';
         $ubicacion->capacidad_maxima = 100;
         $ubicacion->save();
 
@@ -43,6 +45,7 @@ class LocationSeeder extends Seeder
         $ubicacion->canton = 'Esparza';
         $ubicacion->distrito = 'Caldera';
         $ubicacion->direccion_exacta = 'Antiguo Mirador El Nido de las Aguilas';
+        $ubicacion->ubicacion_gps = '';
         $ubicacion->capacidad_maxima = 100;
         $ubicacion->save();
     }

@@ -11,30 +11,38 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $usuario= \App\User::create([
-            'name'=>'Jeison Bastos',
-            'email'=>'jeison.bastos@hotmail.com',
-            'password'=>'123456',
-            'role_id'=>1
+        $usuario = \App\User::create([
+            'nombre' => 'Jeison',
+            'primer_apellido' => 'Bastos',
+            'segundo_apellido' => 'Jimenez',
+            'correo_electronico' => 'jeison.bastos@hotmail.com',
+            'password' => '123456',
+            'role_id' => 1
         ]);
 
         $usuario = \App\User::create([
-            'name' => 'Usuario 1',
-            'email' => 'usuario1@hotmail.com',
+            'nombre' => 'Usuario 1',
+            'primer_apellido' => '',
+            'segundo_apellido' => '',
+            'correo_electronico' => 'usuario1@hotmail.com',
             'password' => '123456',
             'role_id' => 2
         ]);
 
         $usuario = \App\User::create([
-            'name' => 'Usuario 2',
-            'email' => 'usuario2@gmail.com',
+            'nombre' => 'Usuario 2',
+            'primer_apellido' => '',
+            'segundo_apellido' => '',
+            'correo_electronico' => 'usuario2@gmail.com',
             'password' => '123456',
             'role_id' => 2
         ]);
 
         $usuario = \App\User::create([
-            'name' => 'Usuario 3',
-            'email' => 'usuario3@outlook.com',
+            'nombre' => 'Usuario 3',
+            'primer_apellido' => '',
+            'segundo_apellido' => '',
+            'correo_electronico' => 'usuario3@outlook.com',
             'password' => '123456',
             'role_id' => 2
         ]);

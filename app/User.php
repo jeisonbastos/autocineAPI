@@ -16,7 +16,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'nombre',
+        'primer_apellido',
+        'segundo_apellido',
+        'correo_electronico',
+        'password',
+        'role_id'
     ];
 
     /**
@@ -48,5 +53,4 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Reservation');
     }
-
 }

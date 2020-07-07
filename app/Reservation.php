@@ -28,6 +28,6 @@ class Reservation extends Model
 
     public function calc_total()
     {
-        return $this->calc_iva() + 1.00;
+        return $this->calc_iva() * 1.00;
     }
 }
