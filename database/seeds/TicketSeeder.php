@@ -17,5 +17,25 @@ class TicketSeeder extends Seeder
         $tiquete->ticket_type_id=1;
         $tiquete->show_id=1;
         $tiquete->save();
+
+        $tiquete = new \App\Ticket();
+        $tiquete->ticket_type_id = 1;
+        $tiquete->show_id = 1;
+        $tiquete->save();
+
+        $tiquete = new \App\Ticket();
+        $tiquete->ticket_type_id = 1;
+        $tiquete->show_id = 4;
+        $tiquete->save();
+
+        $tiquete = new \App\Ticket();
+        $tiquete->ticket_type_id = 4;
+        $tiquete->show_id = 1;
+        $tiquete->save();
+
+        $tiquete = new \App\Ticket();
+        $tiquete->ticket_type_id = 3;
+        $tiquete->show_id = 2;
+        $tiquete->save();
     }
 }

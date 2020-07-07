@@ -19,8 +19,8 @@ class LocationSeeder extends Seeder
             $table->string('direccion_exacta',150);
             $table->string('ubicacion_gps',100);
             $table->unsignedInteger('capacidad_maxima');*/
-        $ubicacion=new \App\Location();
-        $ubicacion->nombre='Autocine Belen';
+        $ubicacion = new \App\Location();
+        $ubicacion->nombre = 'Autocine Belen';
         $ubicacion->provincia = 'Heredia';
         $ubicacion->canton = 'Belen';
         $ubicacion->distrito = 'San Antonio';
