@@ -15,7 +15,7 @@ class CreateRolesTable extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre',50);
+            $table->string('nombre', 50);
             $table->timestamps();
         });
     }
@@ -27,11 +27,11 @@ class CreateRolesTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign('users_role_id_foreign');
-            #Opcional si necesito decido borrar la columna
-            #$table->dropColumn('role_id');
-        });
+        // Schema::table('roles', function (Blueprint $table) {
+        //     $table->dropForeign('users_role_id_foreign');
+        //     #Opcional si necesito decido borrar la columna
+        //     #$table->dropColumn('role_id');
+        // });
         Schema::dropIfExists('roles');
     }
 }
