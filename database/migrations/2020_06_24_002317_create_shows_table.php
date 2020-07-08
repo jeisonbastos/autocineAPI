@@ -19,7 +19,8 @@ class CreateShowsTable extends Migration
             $table->time('hora');
             $table->unsignedInteger('movie_id');
             $table->unsignedInteger('location_id');
-            $table->boolean('visible_cartelera',false);
+            $table->boolean('visible_cartelera', false);
+            $table->boolean('disponible_venta', false);
             $table->unsignedInteger('cantidad_espacios');
             $table->timestamps();
             #foreign keys
@@ -35,7 +36,7 @@ class CreateShowsTable extends Migration
      */
     public function down()
     {
-        Schema::table('shows',function(Blueprint $table){
+        Schema::table('shows', function (Blueprint $table) {
             $table->dropForeign('shows_movie_id_foreign');
             $table->dropForeign('shows_location_id_foreign');
         });

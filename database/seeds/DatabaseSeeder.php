@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ClassificationSeeder::class);
         $this->call(GenderSeeder::class);
         $this->call(MovieSeeder::class);
+        $this->call(ShowSeeder::class);
         $this->call(ProductTypeSeeder::class);
         $this->call(ProductClassificationSeeder::class);
         $this->call(ProductSeeder::class);

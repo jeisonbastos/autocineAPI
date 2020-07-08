@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ProductClassificationProduct extends Migration
+class ProductProductClassification extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class ProductClassificationProduct extends Migration
      */
     public function up()
     {
-        Schema::create('product_classification_product', function (Blueprint $table) {
+        Schema::create('product_product_classification', function (Blueprint $table) {
             $table->unsignedInteger('product_classification_id');
             $table->unsignedInteger('product_id');
             $table->timestamps();
@@ -29,12 +29,12 @@ class ProductClassificationProduct extends Migration
      */
     public function down()
     {
-        Schema::table('product_classification_product', function (Blueprint $table) {
+        Schema::table('product_product_classification', function (Blueprint $table) {
             $table->dropForeign('product_classification_product_product_classification_id_foreign');
             $table->dropForeign('product_classification_product_product_id_foreign');
             #Opcional si necesito decido borrar la columna
             #$table->dropColumn('role_id');
         });
-        Schema::dropIfExists('product_classification_product');
+        Schema::dropIfExists('product_product_classification');
     }
 }

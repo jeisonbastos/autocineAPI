@@ -16,8 +16,8 @@ class CreateReservationsTable extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->decimal('iva',6,2,true);
-            $table->decimal('total', 6, 2, true);
+            $table->decimal('iva');
+            $table->decimal('total');
             $table->timestamps();
             #foreign keys
             $table->foreign('user_id')->references('id')->on('users');

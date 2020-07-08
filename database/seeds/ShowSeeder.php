@@ -15,16 +15,17 @@ class ShowSeeder extends Seeder
             $table->time('hora');
             $table->unsignedInteger('movie_id');
             $table->unsignedInteger('location_id');
-            $table->boolean('visible_funcion',false);
+            $table->boolean('visible_cartelera',false);
             $table->unsignedInteger('cantidad_espacios');*/
         //id=1
-        $funcion=new \App\Show();
-        $funcion->fecha='2020-07-01';
-        $funcion->hora='15:00';
-        $funcion->movie_id=1;
-        $funcion->location_id=1;
-        $funcion->visible_funcion=true;
-        $funcion->cantidad_espacios=100;
+        $funcion = new \App\Show();
+        $funcion->fecha = '2020-07-01';
+        $funcion->hora = '15:00';
+        $funcion->movie_id = 1;
+        $funcion->location_id = 1;
+        $funcion->visible_cartelera = true;
+        $funcion->disponible_venta = true;
+        $funcion->cantidad_espacios = 100;
         $funcion->save();
         //id=2
         $funcion = new \App\Show();
@@ -32,7 +33,8 @@ class ShowSeeder extends Seeder
         $funcion->hora = '18:00';
         $funcion->movie_id = 1;
         $funcion->location_id = 1;
-        $funcion->visible_funcion = true;
+        $funcion->visible_cartelera = true;
+        $funcion->disponible_venta = true;
         $funcion->cantidad_espacios = 100;
         $funcion->save();
         //id=3
@@ -41,7 +43,8 @@ class ShowSeeder extends Seeder
         $funcion->hora = '19:30';
         $funcion->movie_id = 1;
         $funcion->location_id = 1;
-        $funcion->visible_funcion = true;
+        $funcion->visible_cartelera = true;
+        $funcion->disponible_venta = true;
         $funcion->cantidad_espacios = 100;
         $funcion->save();
         //id=4
@@ -50,7 +53,8 @@ class ShowSeeder extends Seeder
         $funcion->hora = '21:00';
         $funcion->movie_id = 1;
         $funcion->location_id = 1;
-        $funcion->visible_funcion = true;
+        $funcion->visible_cartelera = true;
+        $funcion->disponible_venta = true;
         $funcion->cantidad_espacios = 100;
         $funcion->save();
         //id=5
@@ -59,7 +63,8 @@ class ShowSeeder extends Seeder
         $funcion->hora = '15:00';
         $funcion->movie_id = 1;
         $funcion->location_id = 2;
-        $funcion->visible_funcion = true;
+        $funcion->visible_cartelera = true;
+        $funcion->disponible_venta = false;
         $funcion->cantidad_espacios = 100;
         $funcion->save();
     }

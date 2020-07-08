@@ -9,7 +9,7 @@ class Ticket extends Model
     //
     public function ticket_type()
     {
-        return $this->belongsTo('App\Ticket_Type');
+        return $this->belongsTo('App\TicketType');
     }
 
     public function show()

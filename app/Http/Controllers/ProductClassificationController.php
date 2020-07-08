@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Product_Classification;
+use App\ProductClassification;
 use Illuminate\Http\Request;
 
 class ProductClassificationController extends Controller
@@ -41,10 +41,10 @@ class ProductClassificationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product_Classification  $product_Classification
+     * @param  \App\ProductClassification  $product_Classification
      * @return \Illuminate\Http\Response
      */
-    public function show(Product_Classification $product_Classification)
+    public function show(ProductClassification $product_Classification)
     {
         //
     }
@@ -52,10 +52,10 @@ class ProductClassificationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product_Classification  $product_Classification
+     * @param  \App\ProductClassification  $product_Classification
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product_Classification $product_Classification)
+    public function edit(ProductClassification $product_Classification)
     {
         //
     }
@@ -64,10 +64,10 @@ class ProductClassificationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product_Classification  $product_Classification
+     * @param  \App\ProductClassification  $product_Classification
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product_Classification $product_Classification)
+    public function update(Request $request, ProductClassification $product_Classification)
     {
         //
     }
@@ -75,10 +75,10 @@ class ProductClassificationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product_Classification  $product_Classification
+     * @param  \App\ProductClassification  $product_Classification
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product_Classification $product_Classification)
+    public function destroy(ProductClassification $product_Classification)
     {
         //
     }

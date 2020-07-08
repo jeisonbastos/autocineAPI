@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Product_Type;
+use App\ProductType;
 use Illuminate\Http\Request;
 
 class ProductTypeController extends Controller
@@ -41,10 +41,10 @@ class ProductTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product_Type  $product_Type
+     * @param  \App\ProductType  $product_Type
      * @return \Illuminate\Http\Response
      */
-    public function show(Product_Type $product_Type)
+    public function show(ProductType $product_Type)
     {
         //
     }
@@ -52,10 +52,10 @@ class ProductTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product_Type  $product_Type
+     * @param  \App\ProductType  $product_Type
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product_Type $product_Type)
+    public function edit(ProductType $product_Type)
     {
         //
     }
@@ -64,10 +64,10 @@ class ProductTypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product_Type  $product_Type
+     * @param  \App\ProductType  $product_Type
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product_Type $product_Type)
+    public function update(Request $request, ProductType $product_Type)
     {
         //
     }
@@ -75,10 +75,10 @@ class ProductTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product_Type  $product_Type
+     * @param  \App\ProductType  $product_Type
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product_Type $product_Type)
+    public function destroy(ProductType $product_Type)
     {
         //
     }

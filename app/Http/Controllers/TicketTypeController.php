@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Ticket_Type;
+use App\TicketType;
 use Illuminate\Http\Request;
 
 class TicketTypeController extends Controller
@@ -41,10 +41,10 @@ class TicketTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Ticket_Type  $ticket_Type
+     * @param  \App\TicketType  $ticket_Type
      * @return \Illuminate\Http\Response
      */
-    public function show(Ticket_Type $ticket_Type)
+    public function show(TicketType $ticket_Type)
     {
         //
     }
@@ -52,10 +52,10 @@ class TicketTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Ticket_Type  $ticket_Type
+     * @param  \App\TicketType  $ticket_Type
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ticket_Type $ticket_Type)
+    public function edit(TicketType $ticket_Type)
     {
         //
     }
@@ -64,10 +64,10 @@ class TicketTypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Ticket_Type  $ticket_Type
+     * @param  \App\TicketType  $ticket_Type
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ticket_Type $ticket_Type)
+    public function update(Request $request, TicketType $ticket_Type)
     {
         //
     }
@@ -75,10 +75,10 @@ class TicketTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Ticket_Type  $ticket_Type
+     * @param  \App\TicketType  $ticket_Type
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ticket_Type $ticket_Type)
+    public function destroy(TicketType $ticket_Type)
     {
         //
     }

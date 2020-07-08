@@ -9,7 +9,7 @@ class Product extends Model
     //
     public function product_type()
     {
-        return $this->belongsTo('App\Product_Type');
+        return $this->belongsTo('App\ProductType');
     }
 
     //
@@ -20,6 +20,6 @@ class Product extends Model
 
     public function product_classifications()
     {
-        return $this->belongsToMany('App\Product_Classification');
+        return $this->belongsToMany('App\ProductClassification');
     }
 }

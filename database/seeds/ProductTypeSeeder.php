@@ -11,6 +11,41 @@ class ProductTypeSeeder extends Seeder
      */
     public function run()
     {
-        //
+        /*  $table->string('nombre', 50);
+            $table->string('descripcion', 150);*/
+        $tipo_producto = new \App\ProductType();
+        $tipo_producto->nombre = 'Bebidas';
+        $tipo_producto->descripcion = '';
+        $tipo_producto->save();
+
+        $tipo_producto = new \App\ProductType();
+        $tipo_producto->nombre = 'Golosinas';
+        $tipo_producto->descripcion = '';
+        $tipo_producto->save();
+
+        $tipo_producto = new \App\ProductType();
+        $tipo_producto->nombre = 'Comidas Rápidas';
+        $tipo_producto->descripcion = '';
+        $tipo_producto->save();
+
+        $tipo_producto = new \App\ProductType();
+        $tipo_producto->nombre = 'Comidas Restaurante';
+        $tipo_producto->descripcion = '';
+        $tipo_producto->save();
+
+        $tipo_producto = new \App\ProductType();
+        $tipo_producto->nombre = 'Postres';
+        $tipo_producto->descripcion = '';
+        $tipo_producto->save();
+
+        $tipo_producto = new \App\ProductType();
+        $tipo_producto->nombre = 'Alimentos Mascotas';
+        $tipo_producto->descripcion = '';
+        $tipo_producto->save();
+
+        $tipo_producto = new \App\ProductType();
+        $tipo_producto->nombre = 'Souvenirs';
+        $tipo_producto->descripcion = '';
+        $tipo_producto->save();
     }
 }
