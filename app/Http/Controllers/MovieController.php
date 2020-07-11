@@ -14,7 +14,11 @@ class MovieController extends Controller
      */
     public function index()
     {
-        //
+        //Listado de Peliculas
+        $peliculas = Movie::orderBy('nombre', 'desc')->get();
+        $response = [$peliculas];
+
+        return response()->json($response,200);
     }
 
     /**
