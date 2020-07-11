@@ -505,6 +505,7 @@ class ComposerStaticInit30a967ad824a9d018a63dc3aabe97fe1
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Gender' => __DIR__ . '/../..' . '/app/Gender.php',
+        'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\ClassificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/ClassificationController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\GenderController' => __DIR__ . '/../..' . '/app/Http/Controllers/GenderController.php',

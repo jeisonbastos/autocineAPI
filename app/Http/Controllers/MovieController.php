@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('jwt.auth', ['only'=>'all']);
+    }
     /**
      * Display a listing of the resource.
      *
