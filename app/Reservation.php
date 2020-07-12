@@ -14,15 +14,16 @@ class Reservation extends Model
 
     public function tickets()
     {
-        return $this->belongsToMany('App\Ticket');
+        return $this->belongsToMany('App\Ticket')->withPivot('cantidad');
     }
 
     public function products()
     {
-        return $this->belongsToMany('App\Product');
+        return $this->belongsToMany('App\Product')->withPivot('cantidad');
     }
 
-    public function calc_iva(){
+    public function calc_iva()
+    {
         return 0.0;
     }
 

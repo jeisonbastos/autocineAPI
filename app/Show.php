@@ -14,7 +14,7 @@ class Show extends Model
 
     public function movie()
     {
-        return $this->belongsTo('App\Movie');
+        return $this->belongsTo('App\Movie')->with('classification')->with('genders');
     }
 
     public function tickets()

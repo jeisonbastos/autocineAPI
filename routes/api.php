@@ -72,11 +72,12 @@ Route::group(['prefix' => 'v1'], function () {
         ], function () {
             Route::get('', 'ProductClassificationController@index');
             Route::get('all', 'ProductClassificationController@all');
+            Route::get('/{id}', 'ProductClassificationController@show');
         });
 
         //tipos de productos
         Route::group([
-            'prefix' => 'tipos producto'
+            'prefix' => 'tipo producto'
         ], function () {
             Route::get('', 'ProductTypeController@index');
             Route::get('all', 'ProductTypeController@all');
@@ -99,7 +100,7 @@ Route::group(['prefix' => 'v1'], function () {
             Route::get('', 'ReservationController@index');
             Route::get('all', 'ReservationController@all');
             Route::get('/{id}', 'ReservationController@show');
-            Route::get('user/{id}', 'ReservationController@show_for_user');
+            Route::get('usuario/{user_id}', 'ReservationController@show_for_user');
         });
 
         //roles

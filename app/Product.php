@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     //
-    public function product_type()
+    public function type()
     {
         return $this->belongsTo('App\ProductType');
     }
@@ -15,10 +15,10 @@ class Product extends Model
     //
     public function reservations()
     {
-        return $this->belongsToMany('App\Reservation');
+        return $this->belongsToMany('App\Reservation')->withPivot('cantidad');
     }
 
-    public function product_classifications()
+    public function classifications()
     {
         return $this->belongsToMany('App\ProductClassification');
     }

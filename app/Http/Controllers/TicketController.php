@@ -20,7 +20,7 @@ class TicketController extends Controller
     public function index()
     {
         try {
-            $tiquetes = Ticket::where('visible_cartelera', true)->orderBy('id', 'desc')->orderBy('show_id', 'desc')->with(['show', 'type'])->get();
+            $tiquetes = Ticket::orderBy('id', 'desc')->orderBy('show_id', 'desc')->with(['show', 'ticket_type'])->get();
             $response = [$tiquetes];
 
             return response()->json($response, 200);
@@ -36,7 +36,7 @@ class TicketController extends Controller
     public function all()
     {
         try {
-            $tiquetes = Ticket::orderBy('id', 'desc')->orderBy('show_id', 'desc')->with(['show', 'type'])->get();
+            $tiquetes = Ticket::orderBy('id', 'desc')->orderBy('show_id', 'desc')->with(['show', 'ticket_type'])->get();
             $response = [$tiquetes];
 
             return response()->json($response, 200);
@@ -53,7 +53,7 @@ class TicketController extends Controller
     public function show($id)
     {
         try {
-            $funcion = Ticket::where('id', $id)->orderBy('id', 'desc')->orderBy('show_id', 'desc')->with(['show', 'type'])->get();
+            $funcion = Ticket::where('id', $id)->orderBy('id', 'desc')->orderBy('show_id', 'desc')->with(['show', 'ticket_type'])->get();
             $response = [$funcion];
 
             return response()->json($response, 200);
@@ -70,7 +70,7 @@ class TicketController extends Controller
     public function show_for_a_show($show_id)
     {
         try {
-            $funcion = Ticket::where('show_id', $show_id)->orderBy('id', 'desc')->orderBy('show_id', 'desc')->with(['show', 'type'])->get();
+            $funcion = Ticket::where('show_id', $show_id)->orderBy('id', 'desc')->orderBy('show_id', 'desc')->with(['show', 'ticket_type'])->get();
             $response = [$funcion];
 
             return response()->json($response, 200);

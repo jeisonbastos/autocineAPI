@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProductClassification extends Model
 {
     //
-    public function productos()
+    public function products()
     {
         return $this->belongsToMany('App\Product');
     }

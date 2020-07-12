@@ -20,7 +20,7 @@ class ProductController extends Controller
     public function index()
     {
         try {
-            $productos = Product::orderBy('nombre', 'desc')->with(['product_type', 'reservations', 'classifications'])->get();
+            $productos = Product::orderBy('nombre', 'desc')->with(['type', 'reservations', 'classifications'])->get();
             $response = [$productos];
 
             return response()->json($response, 200);
@@ -36,7 +36,7 @@ class ProductController extends Controller
     public function all()
     {
         try {
-            $productos = Product::orderBy('nombre', 'desc')->with(['product_type', 'reservations', 'classifications'])->get();
+            $productos = Product::orderBy('nombre', 'desc')->with(['type', 'reservations', 'classifications'])->get();
             $response = [$productos];
 
             return response()->json($response, 200);
@@ -53,7 +53,7 @@ class ProductController extends Controller
     public function show($id)
     {
         try {
-            $producto = Product::where('id', $id)->orderBy('nombre', 'desc')->with(['product_type', 'reservations', 'classifications'])->get();
+            $producto = Product::where('id', $id)->orderBy('nombre', 'desc')->with(['type', 'reservations', 'classifications'])->get();
             $response = [$producto];
 
             return response()->json($response, 200);

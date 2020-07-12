@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\ProductType;
 use Illuminate\Http\Request;
 
-class ProductTypeTypeController extends Controller
+class ProductTypeController extends Controller
 {
     public function __construct()
     {
