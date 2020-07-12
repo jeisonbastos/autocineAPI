@@ -20,7 +20,7 @@ class MovieController extends Controller
     public function index()
     {
         try {
-            $peliculas = Movie::where('habilitada', true)->orderBy('nombre', 'desc')->with(['classifications', 'genders', 'shows'])->get();
+            $peliculas = Movie::where('habilitada', true)->orderBy('nombre', 'desc')->with(['classification', 'genders', 'shows'])->get();
             $response = [$peliculas];
 
             return response()->json($response, 200);
@@ -36,7 +36,7 @@ class MovieController extends Controller
     public function all()
     {
         try {
-            $peliculas = Movie::orderBy('nombre', 'desc')->with(['classifications', 'genders', 'shows'])->get();
+            $peliculas = Movie::orderBy('nombre', 'desc')->with(['classification', 'genders', 'shows'])->get();
             $response = [$peliculas];
 
             return response()->json($response, 200);
@@ -53,7 +53,7 @@ class MovieController extends Controller
     public function show($id)
     {
         try {
-            $pelicula = Movie::where('id', $id)->orderBy('nombre', 'desc')->with(['classifications', 'genders', 'shows'])->get();
+            $pelicula = Movie::where('id', $id)->orderBy('nombre', 'desc')->with(['classification', 'genders', 'shows'])->get();
             $response = [$pelicula];
 
             return response()->json($response, 200);
@@ -70,7 +70,7 @@ class MovieController extends Controller
     public function gender($gender_id)
     {
         try {
-            $peliculas = Movie::with(['classifications', 'genders', 'shows'])->where('id', $gender_id)->orderBy('nombre', 'desc')->get();
+            $peliculas = Movie::with(['classification', 'genders', 'shows'])->where('id', $gender_id)->orderBy('nombre', 'desc')->get();
             $response = [$peliculas];
 
             return response()->json($response, 200);

@@ -27,13 +27,13 @@ Route::group(['prefix' => 'v1'], function () {
             Route::post('refresh', 'AuthController@refresh');
             Route::post('me', 'AuthController@me');
         });
-        //index
-        Route::get('', 'MovieController@index');
+
 
         //pelicula
         Route::group([
             'prefix' => 'pelicula'
         ], function () {
+            Route::get('', 'MovieController@index');
             Route::get('/all', 'MovieController@all');
             Route::get('/{id}', 'MovieController@show');
         });
