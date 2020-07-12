@@ -53,8 +53,8 @@ class TicketTypeController extends Controller
     public function show($id)
     {
         try {
-            $$tipo_tiquete = TicketType::where('id', $id)->orderBy('id', 'desc')->with(['tickets'])->get();
-            $response = [$$tipo_tiquete];
+            $tipo_tiquete = TicketType::where('id', $id)->orderBy('id', 'desc')->with(['tickets'])->get();
+            $response = [$tipo_tiquete];
 
             return response()->json($response, 200);
         } catch (\Exception $e) {

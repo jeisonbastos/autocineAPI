@@ -129,7 +129,6 @@ Route::group(['prefix' => 'v1'], function () {
             'prefix' => 'tiquete'
         ], function () {
             Route::get('', 'TicketController@index');
-            Route::get('venta', 'TicketController@sell');
             Route::get('all', 'TicketController@all');
             Route::get('/{id}', 'TicketController@show');
             Route::get('funcion/{show_id}', 'TicketController@show_for_a_show');
@@ -140,8 +139,8 @@ Route::group(['prefix' => 'v1'], function () {
             'prefix' => 'tipo tiquete'
         ], function () {
             Route::get('', 'TicketTypeController@index');
-            Route::get('venta', 'TicketTypeController@sell');
             Route::get('all', 'TicketTypeController@all');
+            Route::get('/{id}', 'TicketTypeController@show');
         });
     });
 });
