@@ -7,18 +7,80 @@ use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('jwt.auth', ['only' => 'all']);
+    }
     /**
-     * Display a listing of the resource.
+     * Listado de Tiquetes habilitadas
+     * @jeisonbastos
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        try {
+            $tiquetes = Ticket::where('visible_cartelera', true)->orderBy('id', 'desc')->orderBy('show_id', 'desc')->with(['show', 'type'])->get();
+            $response = [$tiquetes];
+
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
     }
 
     /**
-     * Show the form for creating a new resource.
+     *  Listado de todas las Tiquetes
+     *
+     */
+    public function all()
+    {
+        try {
+            $tiquetes = Ticket::orderBy('id', 'desc')->orderBy('show_id', 'desc')->with(['show', 'type'])->get();
+            $response = [$tiquetes];
+
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
+    }
+
+    /**
+     * Obtener Tiquete especifico por id
+     * @param  \App\Ticket  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        try {
+            $funcion = Ticket::where('id', $id)->orderBy('id', 'desc')->orderBy('show_id', 'desc')->with(['show', 'type'])->get();
+            $response = [$funcion];
+
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
+    }
+
+    /**
+     * Obtener Tiquetes especifica por show_id
+     * @param  \App\Ticket  $show_id
+     * @return \Illuminate\Http\Response
+     */
+    public function show_for_a_show($show_id)
+    {
+        try {
+            $funcion = Ticket::where('show_id', $show_id)->orderBy('id', 'desc')->orderBy('show_id', 'desc')->with(['show', 'type'])->get();
+            $response = [$funcion];
+
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
+    }
+
+    /**
+     * Ticket the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -39,18 +101,7 @@ class TicketController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Ticket  $ticket
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Ticket $ticket)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Ticket the form for editing the specified resource.
      *
      * @param  \App\Ticket  $ticket
      * @return \Illuminate\Http\Response

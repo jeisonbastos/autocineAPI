@@ -7,14 +7,76 @@ use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('jwt.auth', ['only' => 'all']);
+    }
     /**
-     * Display a listing of the resource.
+     * Listado de ProductTypeos habilitadas
+     * @jeisonbastos
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        try {
+            $reservaciones = Reservation::orderBy('id', 'desc')->with(['user', 'tickets', 'products'])->get();
+            $response = [$reservaciones];
+
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
+    }
+
+    /**
+     *  Listado de todas las productos
+     *
+     */
+    public function all()
+    {
+        try {
+            $reservaciones = Reservation::orderBy('id', 'desc')->with(['user', 'tickets', 'products'])->get();
+            $response = [$reservaciones];
+
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
+    }
+
+    /**
+     * Obtener ProductTypeo especifica por id
+     * @param  \App\Reservation  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        try {
+            $reservacion = Reservation::where('id', $id)->orderBy('id', 'desc')->with(['user', 'tickets', 'products'])->get();
+            $response = [$reservacion];
+
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
+    }
+
+    /**
+     * Obtener ProductTypeo especifica por id
+     * @param  \App\Reservation  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show_for_user($user_id)
+    {
+        try {
+            $reservacion = Reservation::where('user_id', $user_id)->orderBy('id', 'desc')->with(['user', 'tickets', 'products'])->get();
+            $response = [$reservacion];
+
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
     }
 
     /**
@@ -34,17 +96,6 @@ class ReservationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Reservation  $reservation
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Reservation $reservation)
     {
         //
     }

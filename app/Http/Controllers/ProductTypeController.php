@@ -5,16 +5,61 @@ namespace App\Http\Controllers;
 use App\ProductType;
 use Illuminate\Http\Request;
 
-class ProductTypeController extends Controller
+class ProductTypeTypeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('jwt.auth', ['only' => 'all']);
+    }
     /**
-     * Display a listing of the resource.
+     * Listado de ProductTypeos habilitadas
+     * @jeisonbastos
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        try {
+            $productos = ProductType::orderBy('nombre', 'desc')->with(['products'])->get();
+            $response = [$productos];
+
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
+    }
+
+    /**
+     *  Listado de todas las productos
+     *
+     */
+    public function all()
+    {
+        try {
+            $productos = ProductType::orderBy('nombre', 'desc')->with(['products'])->get();
+            $response = [$productos];
+
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
+    }
+
+    /**
+     * Obtener ProductTypeo especifica por id
+     * @param  \App\ProductType  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        try {
+            $producto = ProductType::where('id', $id)->orderBy('nombre', 'desc')->with(['products'])->get();
+            $response = [$producto];
+
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
     }
 
     /**
@@ -34,17 +79,6 @@ class ProductTypeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\ProductType  $product_Type
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ProductType $product_Type)
     {
         //
     }

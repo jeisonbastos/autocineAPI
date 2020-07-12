@@ -12,34 +12,13 @@ class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
     /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
-    public function getJWTCustomClaims()
-    {
-        return [];
-    }
-
-    /**
      * The attributes that are mass assignable.
      * [66n1ByamjJuz8eROUMRep3PH0Z1S2OlJi9khCwAqD1FtV2oBQiC7NGaZAmhTLOQ1]
      * @var array
      */
     protected $fillable = [
-        'nombre',
-        'primer_apellido',
-        'segundo_apellido',
-        'correo_electronico',
+        'name',
+        'email',
         'password',
         'role_id'
     ];
@@ -72,5 +51,24 @@ class User extends Authenticatable implements JWTSubject
     public function reservations()
     {
         return $this->hasMany('App\Reservation');
+    }
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }

@@ -7,14 +7,65 @@ use Illuminate\Http\Request;
 
 class LocationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('jwt.auth', ['only' => 'all']);
+    }
     /**
-     * Display a listing of the resource.
+     * Obtener lista todas las ubicaciones.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         //
+        try {
+            $ubicaciones = Location::orderBy('nombre', 'asc')->with('shows')->get();
+            $response = [$ubicaciones];
+
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
+    }
+
+
+    /**
+     * Obtener ubicacion con el 'id' por parametro
+     *
+     * @param $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+        try {
+            $ubicacion = Location::where('id', $id)->orderBy('nombre', 'asc')->with('shows')->get();
+            $response = [$ubicacion];
+
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
+    }
+
+
+    /**
+     * Obtener Ubicaciones para una provincia
+     * @param $provincia
+     * @return \Illuminate\Http\Response
+     */
+    public function show_for_provincia($provincia)
+    {
+        //
+        try {
+            $ubicaciones = Location::where('provincia', $provincia)->orderBy('nombre', 'asc')->with('shows')->get();
+            $response = [$ubicaciones];
+
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
     }
 
     /**
@@ -34,17 +85,6 @@ class LocationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Location  $location
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Location $location)
     {
         //
     }

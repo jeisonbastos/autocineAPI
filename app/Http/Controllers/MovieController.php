@@ -9,20 +9,74 @@ class MovieController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('jwt.auth', ['only'=>'all']);
+        $this->middleware('jwt.auth', ['only' => 'all']);
     }
     /**
-     * Display a listing of the resource.
+     * Listado de Peliculas habilitadas
+     * @jeisonbastos
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //Listado de Peliculas
-        $peliculas = Movie::orderBy('nombre', 'desc')->get();
-        $response = [$peliculas];
+        try {
+            $peliculas = Movie::where('habilitada', true)->orderBy('nombre', 'desc')->with(['classifications', 'genders', 'shows'])->get();
+            $response = [$peliculas];
 
-        return response()->json($response,200);
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
+    }
+
+    /**
+     *  Listado de todas las peliculas
+     *
+     */
+    public function all()
+    {
+        try {
+            $peliculas = Movie::orderBy('nombre', 'desc')->with(['classifications', 'genders', 'shows'])->get();
+            $response = [$peliculas];
+
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
+    }
+
+    /**
+     * Obtener Pelicula especifica por id
+     * @param  \App\Movie  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        try {
+            $pelicula = Movie::where('id', $id)->orderBy('nombre', 'desc')->with(['classifications', 'genders', 'shows'])->get();
+            $response = [$pelicula];
+
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
+    }
+
+    /**
+     * Obtener Pelicula especifica por id
+     * @param  \App\Movie  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function gender($gender_id)
+    {
+        try {
+            $peliculas = Movie::with(['classifications', 'genders', 'shows'])->where('id', $gender_id)->orderBy('nombre', 'desc')->get();
+            $response = [$peliculas];
+
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
     }
 
     /**
@@ -42,17 +96,6 @@ class MovieController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Movie  $movie
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Movie $movie)
     {
         //
     }

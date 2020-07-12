@@ -7,14 +7,59 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('jwt.auth', ['only' => 'all']);
+    }
     /**
-     * Display a listing of the resource.
+     * Listado de Roles habilitadas
+     * @jeisonbastos
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        try {
+            $reservaciones = Role::orderBy('nombre', 'desc')->with(['users'])->get();
+            $response = [$reservaciones];
+
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
+    }
+
+    /**
+     *  Listado de todos los roles
+     *
+     */
+    public function all()
+    {
+        try {
+            $reservaciones = Role::orderBy('nombre', 'desc')->with(['users'])->get();
+            $response = [$reservaciones];
+
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
+    }
+
+    /**
+     * Obtener Roles especifica por id
+     * @param  \App\Role  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        try {
+            $reservacion = Role::where('id', $id)->orderBy('nombre', 'desc')->with(['users'])->get();
+            $response = [$reservacion];
+
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
     }
 
     /**
@@ -34,17 +79,6 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Role $role)
     {
         //
     }

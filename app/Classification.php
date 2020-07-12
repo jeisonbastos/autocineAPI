@@ -9,6 +9,6 @@ class Classification extends Model
     //
     public function movies()
     {
-        return $this->hasMany('App\Movies');
+        return $this->hasMany('App\Movie');
     }
 }

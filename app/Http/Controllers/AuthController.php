@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -39,7 +42,7 @@ Indicando que excepto las accione de login y register deben solicitarse autentif
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
-            $user->rol_id = $request->rol_id;
+            $user->role_id = $request->role_id;
             //Insertar el usuario
             $user->save();
             //Retornar información del usuario
