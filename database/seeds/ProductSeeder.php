@@ -18,14 +18,15 @@ class ProductSeeder extends Seeder
             $table->decimal('tamano_presentacion');
             $table->decimal('precio');*/
 
-        $producto=new \App\Product();
-        $producto->nombre='Palomitas de Maíz Matequilla';
+        $producto = new \App\Product();
+        $producto->nombre = 'Palomitas de Maíz Matequilla';
         $producto->descripcion = 'Palomitas de maíz con mantequilla';
         $producto->product_type_id = 2;
         $producto->tamano_presentacion = 100.00;
         $producto->precio = 1500.00;
+        $producto->imagenURL = '';
         $producto->save();
-        $producto->product_classifications()->attach([3,8,11]);
+        $producto->classifications()->attach([3, 8, 11]);
 
         $producto = new \App\Product();
         $producto->nombre = 'Palomitas de Maíz Saladas';
@@ -33,17 +34,19 @@ class ProductSeeder extends Seeder
         $producto->product_type_id = 2;
         $producto->tamano_presentacion = 200.00;
         $producto->precio = 1500.00;
+        $producto->imagenURL = '';
         $producto->save();
-        $producto->product_classifications()->attach([3]);
+        $producto->classifications()->attach([3]);
 
         $producto = new \App\Product();
         $producto->nombre = 'Palomitas de Maíz Saladas';
         $producto->descripcion = 'Palomitas de maíz con mantequilla y sal';
         $producto->product_type_id = 2;
-        $producto->tamano_presentacion =350.00;
+        $producto->tamano_presentacion = 350.00;
         $producto->precio = 1500.00;
+        $producto->imagenURL = '';
         $producto->save();
-        $producto->product_classifications()->attach([3]);
+        $producto->classifications()->attach([3]);
 
         $producto = new \App\Product();
         $producto->nombre = 'Coca Cola Zero';
@@ -51,8 +54,9 @@ class ProductSeeder extends Seeder
         $producto->product_type_id = 1;
         $producto->tamano_presentacion = 32.00;
         $producto->precio = 1450.00;
+        $producto->imagenURL = '';
         $producto->save();
-        $producto->product_classifications()->attach([7,12]);
+        $producto->classifications()->attach([7, 12]);
 
         $producto = new \App\Product();
         $producto->nombre = 'Coca Cola Regular';
@@ -60,8 +64,9 @@ class ProductSeeder extends Seeder
         $producto->product_type_id = 1;
         $producto->tamano_presentacion = 20.00;
         $producto->precio = 1200.00;
+        $producto->imagenURL = '';
         $producto->save();
-        $producto->product_classifications()->attach([12]);
+        $producto->classifications()->attach([12]);
 
         $producto = new \App\Product();
         $producto->nombre = 'Coca Cola Regular';
@@ -69,8 +74,9 @@ class ProductSeeder extends Seeder
         $producto->product_type_id = 1;
         $producto->tamano_presentacion = 16.00;
         $producto->precio = 800.00;
+        $producto->imagenURL = '';
         $producto->save();
-        $producto->product_classifications()->attach([12]);
+        $producto->classifications()->attach([12]);
 
         $producto = new \App\Product();
         $producto->nombre = 'Canada Ginger Ale';
@@ -78,8 +84,9 @@ class ProductSeeder extends Seeder
         $producto->product_type_id = 1;
         $producto->tamano_presentacion = 16.00;
         $producto->precio = 800.00;
+        $producto->imagenURL = '';
         $producto->save();
-        $producto->product_classifications()->attach([12]);
+        $producto->classifications()->attach([12]);
 
         $producto = new \App\Product();
         $producto->nombre = 'Nachos Regulares';
@@ -87,8 +94,9 @@ class ProductSeeder extends Seeder
         $producto->product_type_id = 3;
         $producto->tamano_presentacion = 75.00;
         $producto->precio = 2100.00;
+        $producto->imagenURL = '';
         $producto->save();
-        $producto->product_classifications()->attach([3]);
+        $producto->classifications()->attach([3]);
 
         $producto = new \App\Product();
         $producto->nombre = 'Hamburguesa Queso Regular';
@@ -96,8 +104,9 @@ class ProductSeeder extends Seeder
         $producto->product_type_id = 3;
         $producto->tamano_presentacion = 1.00;
         $producto->precio = 1850.00;
+        $producto->imagenURL = '';
         $producto->save();
-        $producto->product_classifications()->attach([17]);
+        $producto->classifications()->attach([17]);
 
         $producto = new \App\Product();
         $producto->nombre = 'Pizza Jamon y Hongos Mediana';
@@ -105,8 +114,8 @@ class ProductSeeder extends Seeder
         $producto->product_type_id = 3;
         $producto->tamano_presentacion = 1.00;
         $producto->precio = 6000.00;
+        $producto->imagenURL = '';
         $producto->save();
-        $producto->product_classifications()->attach([17]);
-
+        $producto->classifications()->attach([17]);
     }
 }

@@ -34,7 +34,7 @@ Route::group(['prefix' => 'v1'], function () {
             'prefix' => 'pelicula'
         ], function () {
             Route::get('', 'MovieController@index');
-            Route::get('/all', 'MovieController@all');
+            Route::get('all', 'MovieController@all');
             Route::get('/{id}', 'MovieController@show');
         });
 

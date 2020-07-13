@@ -9,7 +9,7 @@ class GenderController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('jwt.auth', ['only' => 'all']);
+        $this->middleware('jwt.auth', ['only' => '']);
     }
     /**
      * Listado de Peliculas habilitadas
@@ -21,7 +21,7 @@ class GenderController extends Controller
     {
         try {
             $generos = Gender::orderBy('nombre', 'desc')->with(['movies'])->get();
-            $response = [$generos];
+            $response = $generos;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -37,7 +37,7 @@ class GenderController extends Controller
     {
         try {
             $generos = Gender::orderBy('nombre', 'desc')->with(['movies'])->get();
-            $response = [$generos];
+            $response = $generos;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -54,7 +54,7 @@ class GenderController extends Controller
     {
         try {
             $genero = Gender::where('id', $id)->orderBy('nombre', 'desc')->with(['movies'])->get();
-            $response = [$genero];
+            $response = $genero;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {

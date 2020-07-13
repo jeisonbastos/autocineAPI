@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('product_type_id');
             $table->decimal('tamano_presentacion');
             $table->decimal('precio');
+            $table->string('imagenURL');
             $table->timestamps();
             #foreign keys
             $table->foreign('product_type_id')->references('id')->on('product_types');

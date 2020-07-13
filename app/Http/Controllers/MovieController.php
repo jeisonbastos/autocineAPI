@@ -9,7 +9,7 @@ class MovieController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('jwt.auth', ['only' => 'all']);
+        $this->middleware('jwt.auth', ['only' => 'create']);
     }
     /**
      * Listado de Peliculas habilitadas
@@ -21,7 +21,7 @@ class MovieController extends Controller
     {
         try {
             $peliculas = Movie::where('habilitada', true)->orderBy('nombre', 'desc')->with(['classification', 'genders', 'shows'])->get();
-            $response = [$peliculas];
+            $response = $peliculas;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -37,7 +37,7 @@ class MovieController extends Controller
     {
         try {
             $peliculas = Movie::orderBy('nombre', 'desc')->with(['classification', 'genders', 'shows'])->get();
-            $response = [$peliculas];
+            $response = $peliculas;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -54,7 +54,7 @@ class MovieController extends Controller
     {
         try {
             $pelicula = Movie::where('id', $id)->orderBy('nombre', 'desc')->with(['classification', 'genders', 'shows'])->get();
-            $response = [$pelicula];
+            $response = $pelicula;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -71,7 +71,7 @@ class MovieController extends Controller
     {
         try {
             $peliculas = Movie::with(['classification', 'genders', 'shows'])->where('id', $gender_id)->orderBy('nombre', 'desc')->get();
-            $response = [$peliculas];
+            $response = $peliculas;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
