@@ -21,7 +21,7 @@ class ProductController extends Controller
     {
         try {
             $productos = Product::orderBy('nombre', 'desc')->with(['type', 'reservations', 'classifications'])->get();
-            $response = [$productos];
+            $response = $productos;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -37,7 +37,7 @@ class ProductController extends Controller
     {
         try {
             $productos = Product::orderBy('nombre', 'desc')->with(['type', 'reservations', 'classifications'])->get();
-            $response = [$productos];
+            $response = $productos;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -54,7 +54,7 @@ class ProductController extends Controller
     {
         try {
             $producto = Product::where('id', $id)->orderBy('nombre', 'desc')->with(['type', 'reservations', 'classifications'])->get();
-            $response = [$producto];
+            $response = $producto;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
