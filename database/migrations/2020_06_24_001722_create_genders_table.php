@@ -17,6 +17,7 @@ class CreateGendersTable extends Migration
             $table->increments('id');
             $table->string('nombre',50);
             $table->string('descripcion',300);
+            $table->string('color',10);
             $table->timestamps();
         });
     }
