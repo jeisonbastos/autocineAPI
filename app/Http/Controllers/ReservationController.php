@@ -9,7 +9,7 @@ class ReservationController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('jwt.auth', ['only' => 'all']);
+        $this->middleware('jwt.auth', ['only' => '']);
     }
     /**
      * Listado de ProductTypeos habilitadas
@@ -21,7 +21,7 @@ class ReservationController extends Controller
     {
         try {
             $reservaciones = Reservation::orderBy('id', 'desc')->with(['user', 'tickets', 'products'])->get();
-            $response = [$reservaciones];
+            $response = $reservaciones;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -37,7 +37,7 @@ class ReservationController extends Controller
     {
         try {
             $reservaciones = Reservation::orderBy('id', 'desc')->with(['user', 'tickets', 'products'])->get();
-            $response = [$reservaciones];
+            $response = $reservaciones;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -54,7 +54,7 @@ class ReservationController extends Controller
     {
         try {
             $reservacion = Reservation::where('id', $id)->orderBy('id', 'desc')->with(['user', 'tickets', 'products'])->get();
-            $response = [$reservacion];
+            $response = $reservacion;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -71,7 +71,7 @@ class ReservationController extends Controller
     {
         try {
             $reservacion = Reservation::where('user_id', $user_id)->orderBy('id', 'desc')->with(['user', 'tickets', 'products'])->get();
-            $response = [$reservacion];
+            $response = $reservacion;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {

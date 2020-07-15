@@ -9,7 +9,7 @@ class ShowController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('jwt.auth', ['only' => 'all']);
+        $this->middleware('jwt.auth', ['only' => '']);
     }
     /**
      * Listado de Funciones habilitadas
@@ -21,7 +21,7 @@ class ShowController extends Controller
     {
         try {
             $funciones = Show::where('visible_cartelera', true)->orderBy('location_id', 'desc')->orderBy('movie_id', 'desc')->with(['movie', 'tickets'])->get();
-            $response = [$funciones];
+            $response = $funciones;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -39,7 +39,7 @@ class ShowController extends Controller
     {
         try {
             $funciones = Show::where('disponible_venta', true)->orderBy('location_id', 'desc')->orderBy('movie_id', 'desc')->withCount(['movie', 'tickets'])->get();
-            $response = [$funciones];
+            $response = $funciones;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -55,7 +55,7 @@ class ShowController extends Controller
     {
         try {
             $funciones = Show::orderBy('location_id', 'desc')->orderBy('movie_id', 'desc')->with(['movie', 'tickets'])->get();
-            $response = [$funciones];
+            $response = $funciones;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -72,7 +72,7 @@ class ShowController extends Controller
     {
         try {
             $funcion = Show::where('id', $id)->orderBy('location_id', 'desc')->orderBy('movie_id', 'desc')->with(['movie', 'tickets'])->get();
-            $response = [$funcion];
+            $response = $funcion;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {

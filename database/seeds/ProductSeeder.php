@@ -54,7 +54,7 @@ class ProductSeeder extends Seeder
         $producto->product_type_id = 1;
         $producto->tamano_presentacion = 32.00;
         $producto->precio = 1450.00;
-        $producto->imagenURL = '';
+        $producto->imagenURL = './assets/img/productos/CocaColaZero.jpg';
         $producto->save();
         $producto->classifications()->attach([7, 12]);
 
@@ -74,7 +74,7 @@ class ProductSeeder extends Seeder
         $producto->product_type_id = 1;
         $producto->tamano_presentacion = 16.00;
         $producto->precio = 800.00;
-        $producto->imagenURL = '';
+        $producto->imagenURL = './assets/img/productos/CocaColaFuente.jpg';
         $producto->save();
         $producto->classifications()->attach([12]);
 
@@ -84,7 +84,7 @@ class ProductSeeder extends Seeder
         $producto->product_type_id = 1;
         $producto->tamano_presentacion = 16.00;
         $producto->precio = 800.00;
-        $producto->imagenURL = '';
+        $producto->imagenURL = './assets/img/productos/GingerAleFuente.jpg';
         $producto->save();
         $producto->classifications()->attach([12]);
 
@@ -114,7 +114,7 @@ class ProductSeeder extends Seeder
         $producto->product_type_id = 3;
         $producto->tamano_presentacion = 1.00;
         $producto->precio = 6000.00;
-        $producto->imagenURL = '';
+        $producto->imagenURL = './assets/img/productos/Pizza.jpg';
         $producto->save();
         $producto->classifications()->attach([17]);
     }

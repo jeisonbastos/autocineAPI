@@ -9,7 +9,7 @@ class RoleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('jwt.auth', ['only' => 'all']);
+        $this->middleware('jwt.auth', ['only' => '']);
     }
     /**
      * Listado de Roles habilitadas
@@ -20,8 +20,8 @@ class RoleController extends Controller
     public function index()
     {
         try {
-            $reservaciones = Role::orderBy('nombre', 'desc')->with(['users'])->get();
-            $response = [$reservaciones];
+            $roles = Role::orderBy('nombre', 'desc')->with(['users'])->get();
+            $response = $roles;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -36,8 +36,8 @@ class RoleController extends Controller
     public function all()
     {
         try {
-            $reservaciones = Role::orderBy('nombre', 'desc')->with(['users'])->get();
-            $response = [$reservaciones];
+            $roles = Role::orderBy('nombre', 'desc')->with(['users'])->get();
+            $response = $roles;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -53,8 +53,8 @@ class RoleController extends Controller
     public function show($id)
     {
         try {
-            $reservacion = Role::where('id', $id)->orderBy('nombre', 'desc')->with(['users'])->get();
-            $response = [$reservacion];
+            $role = Role::where('id', $id)->orderBy('nombre', 'desc')->with(['users'])->get();
+            $response = $role;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {

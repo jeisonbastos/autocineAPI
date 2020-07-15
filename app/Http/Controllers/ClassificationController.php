@@ -9,7 +9,7 @@ class ClassificationController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('jwt.auth', ['only' => 'all']);
+        $this->middleware('jwt.auth', ['only' => '']);
     }
     /**
      * Listado de Peliculas habilitadas
@@ -20,8 +20,8 @@ class ClassificationController extends Controller
     public function index()
     {
         try {
-            $classificaciones = Classification::orderBy('siglas', 'desc')->with(['movies'])->get();
-            $response = [$classificaciones];
+            $clasificaciones = Classification::orderBy('siglas', 'desc')->with(['movies'])->get();
+            $response = $clasificaciones;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -36,8 +36,8 @@ class ClassificationController extends Controller
     public function all()
     {
         try {
-            $classificaciones = Classification::orderBy('siglas', 'desc')->with(['movies'])->get();
-            $response = [$classificaciones];
+            $clasificaciones = Classification::orderBy('siglas', 'desc')->with(['movies'])->get();
+            $response = $clasificaciones;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {

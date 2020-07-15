@@ -21,7 +21,7 @@ class LocationController extends Controller
         //
         try {
             $ubicaciones = Location::orderBy('nombre', 'asc')->with('shows')->get();
-            $response = [$ubicaciones];
+            $response = $ubicaciones;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -41,7 +41,7 @@ class LocationController extends Controller
         //
         try {
             $ubicacion = Location::where('id', $id)->orderBy('nombre', 'asc')->with('shows')->get();
-            $response = [$ubicacion];
+            $response = $ubicacion;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -60,7 +60,7 @@ class LocationController extends Controller
         //
         try {
             $ubicaciones = Location::where('provincia', $provincia)->orderBy('nombre', 'asc')->with('shows')->get();
-            $response = [$ubicaciones];
+            $response = $ubicaciones;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {

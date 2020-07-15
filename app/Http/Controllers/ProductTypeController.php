@@ -20,8 +20,8 @@ class ProductTypeController extends Controller
     public function index()
     {
         try {
-            $productos = ProductType::orderBy('nombre', 'desc')->with(['products'])->get();
-            $response = [$productos];
+            $tipos_producto = ProductType::orderBy('nombre', 'desc')->with(['products'])->get();
+            $response = $tipos_producto;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -36,8 +36,8 @@ class ProductTypeController extends Controller
     public function all()
     {
         try {
-            $productos = ProductType::orderBy('nombre', 'desc')->with(['products'])->get();
-            $response = [$productos];
+            $tipos_producto = ProductType::orderBy('nombre', 'desc')->with(['products'])->get();
+            $response = $tipos_producto;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -53,8 +53,8 @@ class ProductTypeController extends Controller
     public function show($id)
     {
         try {
-            $producto = ProductType::where('id', $id)->orderBy('nombre', 'desc')->with(['products'])->get();
-            $response = [$producto];
+            $tipo_producto = ProductType::where('id', $id)->orderBy('nombre', 'desc')->with(['products'])->get();
+            $response = $tipo_producto;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {

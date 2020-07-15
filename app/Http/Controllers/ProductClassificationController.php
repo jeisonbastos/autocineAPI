@@ -21,7 +21,7 @@ class ProductClassificationController extends Controller
     {
         try {
             $clasificaciones_producto = ProductClassification::orderBy('nombre', 'desc')->with(['products'])->get();
-            $response = [$clasificaciones_producto];
+            $response = $clasificaciones_producto;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -37,7 +37,7 @@ class ProductClassificationController extends Controller
     {
         try {
             $clasificaciones_producto = ProductClassification::orderBy('nombre', 'desc')->with(['products'])->get();
-            $response = [$clasificaciones_producto];
+            $response = $clasificaciones_producto;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -54,7 +54,7 @@ class ProductClassificationController extends Controller
     {
         try {
             $clasificacion_producto = ProductClassification::where('id', $id)->orderBy('nombre', 'desc')->with(['products'])->get();
-            $response = [$clasificacion_producto];
+            $response = $clasificacion_producto;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {

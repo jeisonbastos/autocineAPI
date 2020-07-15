@@ -9,7 +9,7 @@ class TicketController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('jwt.auth', ['only' => 'all']);
+        $this->middleware('jwt.auth', ['only' => '']);
     }
     /**
      * Listado de Tiquetes habilitadas
@@ -21,7 +21,7 @@ class TicketController extends Controller
     {
         try {
             $tiquetes = Ticket::orderBy('id', 'desc')->orderBy('show_id', 'desc')->with(['show', 'ticket_type'])->get();
-            $response = [$tiquetes];
+            $response = $tiquetes;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -37,7 +37,7 @@ class TicketController extends Controller
     {
         try {
             $tiquetes = Ticket::orderBy('id', 'desc')->orderBy('show_id', 'desc')->with(['show', 'ticket_type'])->get();
-            $response = [$tiquetes];
+            $response = $tiquetes;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -53,8 +53,8 @@ class TicketController extends Controller
     public function show($id)
     {
         try {
-            $funcion = Ticket::where('id', $id)->orderBy('id', 'desc')->orderBy('show_id', 'desc')->with(['show', 'ticket_type'])->get();
-            $response = [$funcion];
+            $tiquete = Ticket::where('id', $id)->orderBy('id', 'desc')->orderBy('show_id', 'desc')->with(['show', 'ticket_type'])->get();
+            $response = [$tiquete];
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -70,8 +70,8 @@ class TicketController extends Controller
     public function show_for_a_show($show_id)
     {
         try {
-            $funcion = Ticket::where('show_id', $show_id)->orderBy('id', 'desc')->orderBy('show_id', 'desc')->with(['show', 'ticket_type'])->get();
-            $response = [$funcion];
+            $tiquete = Ticket::where('show_id', $show_id)->orderBy('id', 'desc')->orderBy('show_id', 'desc')->with(['show', 'ticket_type'])->get();
+            $response = [$tiquete];
 
             return response()->json($response, 200);
         } catch (\Exception $e) {

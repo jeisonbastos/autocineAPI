@@ -9,7 +9,7 @@ class TicketTypeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('jwt.auth', ['only' => 'all']);
+        $this->middleware('jwt.auth', ['only' => '']);
     }
     /**
      * Listado de TicketType habilitadas
@@ -21,7 +21,7 @@ class TicketTypeController extends Controller
     {
         try {
             $tipos_tiquete = TicketType::orderBy('id', 'desc')->with(['tickets'])->get();
-            $response = [$tipos_tiquete];
+            $response = $tipos_tiquete;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -37,7 +37,7 @@ class TicketTypeController extends Controller
     {
         try {
             $tipos_tiquete = TicketType::orderBy('id', 'desc')->with(['tickets'])->get();
-            $response = [$tipos_tiquete];
+            $response = $tipos_tiquete;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
@@ -54,7 +54,7 @@ class TicketTypeController extends Controller
     {
         try {
             $tipo_tiquete = TicketType::where('id', $id)->orderBy('id', 'desc')->with(['tickets'])->get();
-            $response = [$tipo_tiquete];
+            $response = $tipo_tiquete;
 
             return response()->json($response, 200);
         } catch (\Exception $e) {
