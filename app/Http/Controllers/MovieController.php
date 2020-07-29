@@ -110,10 +110,10 @@ class MovieController extends Controller
             $table->string('imagenURL');*/
         try {
             $this->validate($request, [
-                'nombre' => 'required|min:5|unique:movies',
+                'nombre' => 'required|min:5|unique:movies,nombre',
                 'habilitada' => 'required',
                 'sinopsis' => 'required|min:5',
-                'puntuacion' => 'required|number|min:0',
+                'puntuacion' => 'required|numeric|min:0',
                 'classification_id' => 'required|numeric|min:1',
                 'imagenURL' => 'nullable'
             ]);
@@ -237,5 +237,22 @@ class MovieController extends Controller
     public function destroy(Movie $movie)
     {
         //
+    }
+
+    //Método para dar formato a los errores de validación
+    public function responseErrors($errors, $statusHTML)
+    {
+        $transformed = [];
+
+        foreach ($errors as $field => $message) {
+            $transformed[] = [
+                'field' => $field,
+                'message' => $message[0]
+            ];
+        }
+
+        return response()->json([
+            'errors' => $transformed
+        ], $statusHTML);
     }
 }
