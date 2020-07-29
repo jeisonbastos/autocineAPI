@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Movie;
 use Illuminate\Http\Request;
-use Tymon\JWTAuth\JWTAuth;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class MovieController extends Controller
 {
@@ -110,10 +110,10 @@ class MovieController extends Controller
             $table->string('imagenURL');*/
         try {
             $this->validate($request, [
-                'nombre' => 'required|min:5',
+                'nombre' => 'required|min:5|unique:movies',
                 'habilitada' => 'required',
                 'sinopsis' => 'required|min:5',
-                'puntuacion' => 'required|min:0',
+                'puntuacion' => 'required|number|min:0',
                 'classification_id' => 'required|numeric|min:1',
                 'imagenURL' => 'nullable'
             ]);
@@ -132,9 +132,6 @@ class MovieController extends Controller
         $movie->puntuacion = $request->input('puntuacion');
         $movie->classification()->associate($request->input('classification_id'));
         $movie->imagenURL = $request->input('imagenURL');
-
-        //Usuario que inserta la pelicula
-        $movie->user()->associate($user->id);
 
         if ($movie->save()) {
             $movie->genders()->attach(
@@ -191,17 +188,14 @@ class MovieController extends Controller
         } catch (\illuminate\Validation\ValidationException $e) {
             return $this->responseErrors($e->errors(), 422);
         }
-        //Instancia Movie
+        //Buscar Movie
         $movie = Movie::find($id);
         $movie->nombre = $request->input('nombre');
         $movie->habilitada = $request->input('habilitada');
         $movie->sinopsis = $request->input('sinopsis');
-        $movie->puntuacion = $request->input('nombre');
+        $movie->puntuacion = $request->input('puntuacion');
         $movie->classification()->associate($request->input('classification_id'));
         $movie->imagenURL = $request->input('imagenURL');
-
-        //Usuario que inserta la pelicula
-        $movie->user()->associate($user->id);
 
         if ($movie->update()) {
             $movie->genders()->sync(
