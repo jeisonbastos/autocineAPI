@@ -32,7 +32,7 @@ class MovieSeeder extends Seeder
                             Snowball, Por Otro Lado, Se Embarca En Una Peligrosa Misión Para Liberar A Un Tigre Blanco, Hu,
                             De Sus Captures En Un Circo De Animales. Secuela De "Mascotas"';
         $pelicula->puntuacion = 8.8;
-        $pelicula->imagenURL = 'src/assets/img/peliculas/Mascotas2.jpg';
+        $pelicula->imagenURL = './assets/img/peliculas/Mascotas2.jpg';
         $pelicula->save();
         // Para hacer insert en tabla pivote
         $pelicula->genders()->attach([5]);
@@ -44,7 +44,7 @@ class MovieSeeder extends Seeder
         $pelicula->sinopsis = 'Dos hermanos especializados en el robo de automóviles viajan al sur de Francia
                                para probar nuevos horizontes.';
         $pelicula->puntuacion = 6.8;
-        $pelicula->imagenURL = 'src/assets/img/peliculas/LaGranFuga.jpg';
+        $pelicula->imagenURL = './assets/img/peliculas/LaGranFuga.jpg';
         $pelicula->save();
         // Para hacer insert en tabla pivote
         $pelicula->genders()->attach([1]);
@@ -57,8 +57,8 @@ class MovieSeeder extends Seeder
                                 El Chef Adam Jones (Bradley Cooper), Pasado Un Tiempo, Abre Con Su Antiguo Equipo
                                 Un Nuevo Restaurante Con El Objetivo De Alcanzar La Perfección Y Conseguir Las Tres
                                 Estrellas Michelin.';
-        $pelicula->puntuacion = 8.8;
-        $pelicula->imagenURL = 'src/assets/img/peliculas/UnaBuenaReceta.jpg';
+        $pelicula->puntuacion = 4.3;
+        $pelicula->imagenURL = './assets/img/peliculas/UnaBuenaReceta.jpg';
         $pelicula->save();
         // Para hacer insert en tabla pivote
         $pelicula->genders()->attach([3, 4]);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Show;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ShowController extends Controller
 {
@@ -167,5 +168,22 @@ class ShowController extends Controller
     public function destroy(Show $show)
     {
         //
+    }
+
+    //Método para dar formato a los errores de validación
+    public function responseErrors($errors, $statusHTML)
+    {
+        $transformed = [];
+
+        foreach ($errors as $field => $message) {
+            $transformed[] = [
+                'field' => $field,
+                'message' => $message[0]
+            ];
+        }
+
+        return response()->json([
+            'errors' => $transformed
+        ], $statusHTML);
     }
 }

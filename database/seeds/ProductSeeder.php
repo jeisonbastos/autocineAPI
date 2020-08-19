@@ -25,6 +25,7 @@ class ProductSeeder extends Seeder
         $producto->tamano_presentacion = 100.00;
         $producto->precio = 1500.00;
         $producto->imagenURL = '';
+        $producto->puntuacion = 0;
         $producto->save();
         $producto->classifications()->attach([3, 8, 11]);
 
@@ -35,6 +36,7 @@ class ProductSeeder extends Seeder
         $producto->tamano_presentacion = 200.00;
         $producto->precio = 1500.00;
         $producto->imagenURL = '';
+        $producto->puntuacion = 0;
         $producto->save();
         $producto->classifications()->attach([3]);
 
@@ -45,6 +47,7 @@ class ProductSeeder extends Seeder
         $producto->tamano_presentacion = 350.00;
         $producto->precio = 1500.00;
         $producto->imagenURL = '';
+        $producto->puntuacion = 0;
         $producto->save();
         $producto->classifications()->attach([3]);
 
@@ -55,6 +58,7 @@ class ProductSeeder extends Seeder
         $producto->tamano_presentacion = 32.00;
         $producto->precio = 1450.00;
         $producto->imagenURL = './assets/img/productos/CocaColaZero.jpg';
+        $producto->puntuacion = 0;
         $producto->save();
         $producto->classifications()->attach([7, 12]);
 
@@ -65,6 +69,7 @@ class ProductSeeder extends Seeder
         $producto->tamano_presentacion = 20.00;
         $producto->precio = 1200.00;
         $producto->imagenURL = '';
+        $producto->puntuacion = 0;
         $producto->save();
         $producto->classifications()->attach([12]);
 
@@ -75,6 +80,7 @@ class ProductSeeder extends Seeder
         $producto->tamano_presentacion = 16.00;
         $producto->precio = 800.00;
         $producto->imagenURL = './assets/img/productos/CocaColaFuente.jpg';
+        $producto->puntuacion = 0;
         $producto->save();
         $producto->classifications()->attach([12]);
 
@@ -84,7 +90,8 @@ class ProductSeeder extends Seeder
         $producto->product_type_id = 1;
         $producto->tamano_presentacion = 16.00;
         $producto->precio = 800.00;
-        $producto->imagenURL = './assets/img/productos/GingerAleFuente.jpg';
+        $producto->imagenURL = './assets/img/productos/GingerAle.jpg';
+        $producto->puntuacion = 0;
         $producto->save();
         $producto->classifications()->attach([12]);
 
@@ -105,6 +112,7 @@ class ProductSeeder extends Seeder
         $producto->tamano_presentacion = 1.00;
         $producto->precio = 1850.00;
         $producto->imagenURL = '';
+        $producto->puntuacion = 0;
         $producto->save();
         $producto->classifications()->attach([17]);
 
@@ -115,6 +123,7 @@ class ProductSeeder extends Seeder
         $producto->tamano_presentacion = 1.00;
         $producto->precio = 6000.00;
         $producto->imagenURL = './assets/img/productos/Pizza.jpg';
+        $producto->puntuacion = 0;
         $producto->save();
         $producto->classifications()->attach([17]);
     }

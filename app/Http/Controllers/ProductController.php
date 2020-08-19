@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ProductController extends Controller
 {
@@ -80,7 +81,56 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        ////$table->increments('id');
+        // $table->string('nombre', 75);
+        // $table->string('descripcion', 250);
+        // $table->unsignedInteger('product_type_id');
+        // $table->decimal('tamano_presentacion');
+        // $table->decimal('precio');
+        // $table->string('imagenURL');
+        // $table->decimal('puntuacion');
+        // $table->timestamps();
+        // #foreign keys
+        // $table->foreign('product_type_id')->references('id')->on('product_types');
+        try {
+            $this->validate($request, [
+                'nombre' => 'required|min:5',
+                'descripcion' => 'required|min:5',
+                'product_type_id' => 'required|numeric|min:1',
+                'tamano_presentacion' => 'required',
+                'precio' => 'required',
+                'puntuacion' => 'required|min:0',
+                'classification_id' => 'required|numeric|min:1',
+                'imagenURL' => 'nullable'
+            ]);
+            //Obtener el usuario autenticado actual
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['msg' => 'Usuario no encontrado'], 404);
+            }
+        } catch (\illuminate\Validation\ValidationException $e) {
+            return $this->responseErrors($e->errors(), 422);
+        }
+        //instancia Product
+        $product = new Product();
+        $product->nombre = $request->input('nombre');
+        $product->descripcion = $request->input('descripcion');
+        $product->product_type()->associate($request->input('product_type_id'));
+        $product->tamano_presentacion = $request->input('tamano_presentacion');
+        $product->precio = $request->input('precio');
+        $product->puntuacion = $request->input('puntuacion');
+        $product->imagenURL = $request->input('imagenURL');
+
+        if ($product->update()) {
+            $product->classifications()->sync(
+                $request->input('classifications') === null ?
+                    [] : $request->input('classifications')
+            );
+            $response = 'Producto Actualizado Exitósamente';
+            return response()->json($response, 200);
+        } else {
+            $response = ['msg' => 'Error en la Actualización de la Producto'];
+            return response()->json($response, 404);
+        }
     }
 
 
@@ -102,9 +152,58 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        //
+        ////$table->increments('id');
+        // $table->string('nombre', 75);
+        // $table->string('descripcion', 250);
+        // $table->unsignedInteger('product_type_id');
+        // $table->decimal('tamano_presentacion');
+        // $table->decimal('precio');
+        // $table->string('imagenURL');
+        // $table->decimal('puntuacion');
+        // $table->timestamps();
+        // #foreign keys
+        // $table->foreign('product_type_id')->references('id')->on('product_types');
+        try {
+            $this->validate($request, [
+                'nombre' => 'required|min:5',
+                'descripcion' => 'required|min:5',
+                'product_type_id' => 'required|numeric|min:1',
+                'tamano_presentacion' => 'required',
+                'precio' => 'required',
+                'puntuacion' => 'required|min:0',
+                'classification_id' => 'required|numeric|min:1',
+                'imagenURL' => 'nullable'
+            ]);
+            //Obtener el usuario autenticado actual
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['msg' => 'Usuario no encontrado'], 404);
+            }
+        } catch (\illuminate\Validation\ValidationException $e) {
+            return $this->responseErrors($e->errors(), 422);
+        }
+        //Buscar Product
+        $product = Product::find($id);
+        $product->nombre = $request->input('nombre');
+        $product->descripcion = $request->input('descripcion');
+        $product->product_type()->associate($request->input('product_type_id'));
+        $product->tamano_presentacion = $request->input('tamano_presentacion');
+        $product->precio = $request->input('precio');
+        $product->puntuacion = $request->input('puntuacion');
+        $product->imagenURL = $request->input('imagenURL');
+
+        if ($product->update()) {
+            $product->classifications()->sync(
+                $request->input('classifications') === null ?
+                    [] : $request->input('classifications')
+            );
+            $response = 'Producto Actualizado Exitósamente';
+            return response()->json($response, 200);
+        } else {
+            $response = ['msg' => 'Error en la Actualización de la Producto'];
+            return response()->json($response, 404);
+        }
     }
 
     /**
@@ -116,5 +215,22 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+
+    //Método para dar formato a los errores de validación
+    public function responseErrors($errors, $statusHTML)
+    {
+        $transformed = [];
+
+        foreach ($errors as $field => $message) {
+            $transformed[] = [
+                'field' => $field,
+                'message' => $message[0]
+            ];
+        }
+
+        return response()->json([
+            'errors' => $transformed
+        ], $statusHTML);
     }
 }

@@ -19,7 +19,7 @@ class CreateMoviesTable extends Migration
             $table->unsignedInteger('classification_id');
             $table->boolean('habilitada', false);
             $table->text('sinopsis');
-            $table->decimal('puntuacion');
+            $table->decimal('puntuacion')->default(0);
             $table->string('imagenURL');
             $table->timestamps();
             #foreign keys

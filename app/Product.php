@@ -22,4 +22,9 @@ class Product extends Model
     {
         return $this->belongsToMany('App\ProductClassification');
     }
+
+    public function votes()
+    {
+        return $this->hasMany('App\ProductVote');
+    }
 }

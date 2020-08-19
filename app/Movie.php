@@ -22,4 +22,7 @@ class Movie extends Model
         return $this->hasMany('App\Show');
     }
 
+    public function votes(){
+        return $this->hasMany('App\MovieVote');
+    }
 }

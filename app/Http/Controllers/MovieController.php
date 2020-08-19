@@ -228,6 +228,7 @@ class MovieController extends Controller
             return response()->json($response, 404);
         }
     }
+
     /**
      * Remove the specified resource from storage.
      *

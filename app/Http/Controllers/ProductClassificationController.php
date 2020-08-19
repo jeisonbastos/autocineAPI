@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ProductClassification;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ProductClassificationController extends Controller
 {

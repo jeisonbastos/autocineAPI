@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\TicketType;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class TicketTypeController extends Controller
 {
