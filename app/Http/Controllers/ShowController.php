@@ -21,7 +21,7 @@ class ShowController extends Controller
     public function index()
     {
         try {
-            $funciones = Show::where('visible_cartelera', true)->orderBy('location_id', 'desc')->orderBy('movie_id', 'desc')->with(['movie', 'tickets', 'location'])->get();
+            $funciones = Show::where('visible_cartelera', true)->orderBy('location_id', 'desc')->orderBy('show_id', 'desc')->with(['show', 'tickets', 'location'])->get();
             $response = $funciones;
 
             return response()->json($response, 200);
@@ -39,7 +39,7 @@ class ShowController extends Controller
     public function sell()
     {
         try {
-            $funciones = Show::where('disponible_venta', true)->orderBy('location_id', 'desc')->orderBy('movie_id', 'desc')->withCount(['movie','tickets', 'location'])->get();
+            $funciones = Show::where('disponible_venta', true)->orderBy('location_id', 'desc')->orderBy('show_id', 'desc')->withCount(['show', 'tickets', 'location'])->get();
             $response = $funciones;
 
             return response()->json($response, 200);
@@ -55,7 +55,7 @@ class ShowController extends Controller
     public function all()
     {
         try {
-            $funciones = Show::orderBy('location_id', 'desc')->orderBy('movie_id', 'desc')->with(['movie','tickets', 'location'])->get();
+            $funciones = Show::orderBy('location_id', 'desc')->orderBy('movie_id', 'desc')->with(['movie', 'tickets', 'location'])->get();
             $response = $funciones;
 
             return response()->json($response, 200);
@@ -72,7 +72,7 @@ class ShowController extends Controller
     public function show($id)
     {
         try {
-            $funcion = Show::where('id', $id)->orderBy('location_id', 'desc')->orderBy('movie_id', 'desc')->with(['movie','tickets', 'location'])->get();
+            $funcion = Show::where('id', $id)->orderBy('location_id', 'desc')->orderBy('show_id', 'desc')->with(['show', 'tickets', 'location'])->get();
             $response = $funcion;
 
             return response()->json($response, 200);
@@ -89,7 +89,7 @@ class ShowController extends Controller
     public function show_for_location($location_id)
     {
         try {
-            $funcion = Show::where('location_id', $location_id)->orderBy('location_id', 'desc')->orderBy('movie_id', 'desc')->with(['movie','tickets', 'location'])->get();
+            $funcion = Show::where('location_id', $location_id)->orderBy('location_id', 'desc')->orderBy('movie_id', 'desc')->with(['movie', 'tickets', 'location'])->get();
             $response = [$funcion];
 
             return response()->json($response, 200);
@@ -99,14 +99,14 @@ class ShowController extends Controller
     }
 
     /**
-     * Obtener Funciones especifica por movie_id
-     * @param  \App\Show  $movie_id
+     * Obtener Funciones especifica por show_id
+     * @param  \App\Show  $show_id
      * @return \Illuminate\Http\Response
      */
     public function show_for_movie($movie_id)
     {
         try {
-            $funcion = Show::where('movie_id', $movie_id)->orderBy('location_id', 'desc')->orderBy('movie_id', 'desc')->with(['movie','tickets', 'location'])->get();
+            $funcion = Show::where('movie_id', $movie_id)->orderBy('location_id', 'desc')->orderBy('movie_id', 'desc')->with(['movie', 'tickets', 'location'])->get();
             $response = [$funcion];
 
             return response()->json($response, 200);
@@ -133,7 +133,55 @@ class ShowController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $table->increments('id');
+        // $table->date('fecha');
+        // $table->time('hora');
+        // $table->unsignedInteger('show_id');
+        // $table->unsignedInteger('location_id');
+        // $table->boolean('visible_cartelera', false);
+        // $table->boolean('disponible_venta', false);
+        // $table->unsignedInteger('cantidad_espacios');
+        // $table->timestamps();
+        // #foreign keys
+        // $table->foreign('show_id')->references('id')->on('shows');
+        // $table->foreign('location_id')->references('id')->on('locations');
+        try {
+            $this->validate($request, [
+                'fecha' => 'required|unique:shows,fecha',
+                'hora' => 'required|unique:shows,hora',
+                'location_id' => 'required|numeric|min:1',
+                'movie_id' => 'required|numeric|min:1',
+                'visible_cartelera' => 'required',
+                'disponible_venta' => 'required',
+                'cantidad_espacios' => 'required',
+            ]);
+            //Obtener el usuario autenticado actual
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(
+                    ['msg' => 'Usuario no encontrado'],
+                    404
+                );
+            }
+        } catch (\illuminate\Validation\ValidationException $e) {
+            return $this->responseErrors($e->errors(), 422);
+        }
+        //Instancia Show
+        $show = new Show();
+        $show->fecha = $request->input('fecha');
+        $show->hora = $request->input('hora');
+        $show->location()->associate($request->input('location_id'));
+        $show->movie()->associate($request->input('movie_id'));
+        $show->visible_cartelera = $request->input('visible_cartelera');
+        $show->disponible_venta = $request->input('disponible_venta');
+        $show->cantidad_espacios = $request->input('cantidad_espacios');
+
+        if ($show->save()) {
+            $response = 'Función Creada Exitósamente';
+            return response()->json($response, 201);
+        } else {
+            $response = ['msg' => 'Error en la creación de la Función'];
+            return response()->json($response, 404);
+        }
     }
 
     /**
@@ -154,9 +202,57 @@ class ShowController extends Controller
      * @param  \App\Show  $show
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Show $show)
+    public function update(Request $request, $id)
     {
-        //
+        // $table->increments('id');
+        // $table->date('fecha');
+        // $table->time('hora');
+        // $table->unsignedInteger('show_id');
+        // $table->unsignedInteger('location_id');
+        // $table->boolean('visible_cartelera', false);
+        // $table->boolean('disponible_venta', false);
+        // $table->unsignedInteger('cantidad_espacios');
+        // $table->timestamps();
+        // #foreign keys
+        // $table->foreign('show_id')->references('id')->on('shows');
+        // $table->foreign('location_id')->references('id')->on('locations');
+        try {
+            $this->validate($request, [
+                'fecha' => ['required', 'unique:shows,fecha,' . $this->id . ',NULL,id,hostname,' . $request->input('hostname')],
+                'hora' => 'required|unique:shows,hora',
+                'location_id' => 'required|numeric|min:1',
+                'movie_id' => 'required|numeric|min:1',
+                'visible_cartelera' => 'required',
+                'disponible_venta' => 'required',
+                'cantidad_espacios' => 'required',
+            ]);
+            //Obtener el usuario autenticado actual
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(
+                    ['msg' => 'Usuario no encontrado'],
+                    404
+                );
+            }
+        } catch (\illuminate\Validation\ValidationException $e) {
+            return $this->responseErrors($e->errors(), 422);
+        }
+        //Buscar Show
+        $show = Show::find($id);
+        $show->fecha = $request->input('fecha');
+        $show->hora = $request->input('hora');
+        $show->location()->associate($request->input('location_id'));
+        $show->movie()->associate($request->input('movie_id'));
+        $show->visible_cartelera = $request->input('visible_cartelera');
+        $show->disponible_venta = $request->input('disponible_venta');
+        $show->cantidad_espacios = $request->input('cantidad_espacios');
+
+        if ($show->update()) {
+            $response = 'Función Actualizada Exitósamente';
+            return response()->json($response, 201);
+        } else {
+            $response = ['msg' => 'Error en la actualización de la Función'];
+            return response()->json($response, 404);
+        }
     }
 
     /**

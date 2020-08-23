@@ -120,9 +120,12 @@ Route::group(['prefix' => 'v1'], function () {
             'prefix' => 'funcion'
         ], function () {
             Route::get('', 'ShowController@index');
+            Route::post('', 'ShowController@store');
             Route::get('venta', 'ShowController@sell');
             Route::get('all', 'ShowController@all');
             Route::get('/{id}', 'ShowController@show');
+            Route::patch('/{id}', 'ShowController@update');
+            Route::patch('habilitar_venta/{id}', 'ShowController@habilitar_venta');
             Route::get('ubicacion/{location_id}', 'ShowController@show_for_location');
             Route::get('pelicula/{movie_id}', 'ShowController@show_for_movie');
         });
