@@ -92,7 +92,10 @@ Route::group(['prefix' => 'v1'], function () {
             'prefix' => 'producto'
         ], function () {
             Route::get('', 'ProductController@index');
+            Route::post('', 'ProductController@store');
             Route::get('all', 'ProductController@all');
+            Route::patch('/{id}', 'ProductController@update');
+            Route::patch('habilitar/{id}', 'ProductController@habilitar');
             Route::get('/{id}', 'ProductController@show');
         });
 

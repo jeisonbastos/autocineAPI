@@ -21,7 +21,7 @@ class ShowController extends Controller
     public function index()
     {
         try {
-            $funciones = Show::where('visible_cartelera', true)->orderBy('location_id', 'desc')->orderBy('show_id', 'desc')->with(['show', 'tickets', 'location'])->get();
+            $funciones = Show::where('visible_cartelera', true)->orderBy('location_id', 'desc')->orderBy('movie_id', 'desc')->with(['movie', 'tickets', 'location'])->get();
             $response = $funciones;
 
             return response()->json($response, 200);
@@ -39,7 +39,7 @@ class ShowController extends Controller
     public function sell()
     {
         try {
-            $funciones = Show::where('disponible_venta', true)->orderBy('location_id', 'desc')->orderBy('show_id', 'desc')->withCount(['show', 'tickets', 'location'])->get();
+            $funciones = Show::where('disponible_venta', true)->orderBy('location_id', 'desc')->orderBy('movie_id', 'desc')->withCount(['movie', 'tickets', 'location'])->get();
             $response = $funciones;
 
             return response()->json($response, 200);
@@ -72,7 +72,7 @@ class ShowController extends Controller
     public function show($id)
     {
         try {
-            $funcion = Show::where('id', $id)->orderBy('location_id', 'desc')->orderBy('show_id', 'desc')->with(['show', 'tickets', 'location'])->get();
+            $funcion = Show::where('id', $id)->orderBy('location_id', 'desc')->orderBy('movie_id', 'desc')->with(['movie', 'tickets', 'location'])->get();
             $response = $funcion;
 
             return response()->json($response, 200);
@@ -146,15 +146,27 @@ class ShowController extends Controller
         // $table->foreign('show_id')->references('id')->on('shows');
         // $table->foreign('location_id')->references('id')->on('locations');
         try {
-            $this->validate($request, [
-                'fecha' => 'required|unique:shows,fecha',
-                'hora' => 'required|unique:shows,hora',
-                'location_id' => 'required|numeric|min:1',
-                'movie_id' => 'required|numeric|min:1',
-                'visible_cartelera' => 'required',
-                'disponible_venta' => 'required',
-                'cantidad_espacios' => 'required',
-            ]);
+            $this->validate(
+                $request,
+                [
+                    'fecha' => ['required', 'unique:shows,fecha,,id,hora,' . $request->input('hora') . ',location_id,' . $request->input('location_id')],
+                    'hora' => ['required', 'unique:shows,hora,,id,fecha,' . $request->input('fecha') . ',location_id,' . $request->input('location_id')],
+                    'location_id' => 'required|numeric|min:1',
+                    'movie_id' => 'required|numeric|min:1',
+                    'visible_cartelera' => 'required',
+                    'disponible_venta' => 'required',
+                    'cantidad_espacios' => 'required|numeric|min:1',
+                ],
+                [
+                    'fecha.unique' => 'Ya existe una funcion en la fecha seleccionada, con la misma hora y ubicación',
+                    'hora.unique' => 'Ya existe una funcion en la hora seleccionada, con misma la fecha y ubicación',
+                    'location_id' => 'Debe seleccionar una Ubicación',
+                    'movie_id' => 'Debe seleccionar una Película',
+                    'visible_cartelera' => 'Visible en cartelera es requerido y no debes ser nulo',
+                    'disponible_venta' => 'Visible en cartelera es requerido y no debes ser nulo',
+                    'cantidad_espacios' => 'La cantidad de espacios es requerida y debe ser mayor que cero',
+                ]
+            );
             //Obtener el usuario autenticado actual
             if (!$user = JWTAuth::parseToken()->authenticate()) {
                 return response()->json(
@@ -217,15 +229,22 @@ class ShowController extends Controller
         // $table->foreign('show_id')->references('id')->on('shows');
         // $table->foreign('location_id')->references('id')->on('locations');
         try {
-            $this->validate($request, [
-                'fecha' => ['required', 'unique:shows,fecha,' . $this->id . ',NULL,id,hostname,' . $request->input('hostname')],
-                'hora' => 'required|unique:shows,hora',
-                'location_id' => 'required|numeric|min:1',
-                'movie_id' => 'required|numeric|min:1',
-                'visible_cartelera' => 'required',
-                'disponible_venta' => 'required',
-                'cantidad_espacios' => 'required',
-            ]);
+            $this->validate(
+                $request,
+                [
+                    'fecha' => ['required', 'unique:shows,fecha,' . $id . ',id,hora,' . $request->input('hora') . ',location_id,' . $request->input('location_id')],
+                    'hora' => ['required', 'unique:shows,hora,' . $id . ',id,fecha,' . $request->input('fecha') . ',location_id,' . $request->input('location_id')],
+                    'location_id' => 'required|numeric|min:1',
+                    'movie_id' => 'required|numeric|min:1',
+                    'visible_cartelera' => 'required',
+                    'disponible_venta' => 'required',
+                    'cantidad_espacios' => 'required',
+                ],
+                [
+                    'fecha.unique' => 'Ya existe una funcion en la fecha seleccionada, con la misma hora y ubicación',
+                    'hora.unique' => 'Ya existe una funcion en la hora seleccionada, con misma la fecha y ubicación',
+                ]
+            );
             //Obtener el usuario autenticado actual
             if (!$user = JWTAuth::parseToken()->authenticate()) {
                 return response()->json(

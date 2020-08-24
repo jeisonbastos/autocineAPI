@@ -51,7 +51,7 @@ class ReservationController extends Controller
      * @param  \App\Reservation  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function reservacion($id)
     {
         try {
             $reservacion = Reservation::where('id', $id)->orderBy('id', 'desc')->with(['user', 'tickets', 'products'])->get();
@@ -68,7 +68,7 @@ class ReservationController extends Controller
      * @param  \App\Reservation  $id
      * @return \Illuminate\Http\Response
      */
-    public function show_for_user($user_id)
+    public function reservacion_for_user($user_id)
     {
         try {
             $reservacion = Reservation::where('user_id', $user_id)->orderBy('id', 'desc')->with(['user', 'tickets', 'products'])->get();
@@ -98,7 +98,46 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $table->increments('id');
+        // $table->unsignedInteger('user_id');
+        // $table->decimal('iva');
+        // $table->decimal('total');
+        try {
+            $this->validate($request, [
+                'user_id' => 'required|numeric|min:1',
+                'tickets' => 'required|array|min:1',
+                'products' => 'required|array|min:0',
+            ]);
+            //Obtener el usuario autenticado actual
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(
+                    ['msg' => 'Usuario no encontrado'],
+                    404
+                );
+            }
+        } catch (\illuminate\Validation\ValidationException $e) {
+            return $this->responseErrors($e->errors(), 422);
+        }
+        //Instancia Show
+        $reservacion = new Reservation();
+        $reservacion->user()->associate($request->input('user_id'));
+        $reservacion->iva = $reservacion->calc_iva($request->input('iva'));
+        $reservacion->total = $reservacion->calc_iva($request->input('total'));
+        if ($reservacion->save()) {
+            $reservacion->tickets()->attach(
+                $request->input('tickets') === null ?
+                    [] : $request->input('tickets')
+            );
+            $reservacion->products()->attach(
+                $request->input('products') === null ?
+                    [] : $request->input('products')
+            );
+            $response = 'Reservación Creada Exitósamente';
+            return response()->json($response, 201);
+        } else {
+            $response = ['msg' => 'Error en la creación de la Reservación'];
+            return response()->json($response, 404);
+        }
     }
 
     /**
@@ -119,9 +158,51 @@ class ReservationController extends Controller
      * @param  \App\Reservation  $reservation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Reservation $reservation)
+    public function update(Request $request, $id)
     {
-        //
+        // $table->increments('id');
+        // $table->unsignedInteger('user_id');
+        // $table->decimal('iva');
+        // $table->decimal('total');
+        try {
+            $this->validate($request, [
+                'user_id' => 'required|unique:reservacions,fecha',
+                'iva' => 'required|unique:reservacions,hora',
+                'total' => 'required|numeric|min:1',
+                'tickets' => 'required|array|min:1',
+                'products' => 'required|array|min:0',
+            ]);
+            //Obtener el usuario autenticado actual
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(
+                    ['msg' => 'Usuario no encontrado'],
+                    404
+                );
+            }
+        } catch (\illuminate\Validation\ValidationException $e) {
+            return $this->responseErrors($e->errors(), 422);
+        }
+        //Instancia Show
+        $reservacion = Reservation::find($id);
+        $reservacion->user()->associate($request->input('user_id'));
+        $reservacion->iva = $reservacion->calc_iva();
+        $reservacion->total = $reservacion->calc_iva();
+
+        if ($reservacion->update()) {
+            $reservacion->tickets()->sync(
+                $request->input('tickets') === null ?
+                    [] : $request->input('tickets')
+            );
+            $reservacion->products()->sync(
+                $request->input('products') === null ?
+                    [] : $request->input('products')
+            );
+            $response = 'Reservación Actualizada Exitósamente';
+            return response()->json($response, 201);
+        } else {
+            $response = ['msg' => 'Error en la actualización de la Reservación'];
+            return response()->json($response, 404);
+        }
     }
 
     /**
