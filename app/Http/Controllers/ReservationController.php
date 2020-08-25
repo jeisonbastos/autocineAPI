@@ -105,6 +105,8 @@ class ReservationController extends Controller
         try {
             $this->validate($request, [
                 'user_id' => 'required|numeric|min:1',
+                'iva'=> 'nullable',
+                'total' => 'nullable',
                 'tickets' => 'required|array|min:1',
                 'products' => 'required|array|min:0',
             ]);
@@ -121,12 +123,14 @@ class ReservationController extends Controller
         //Instancia Show
         $reservacion = new Reservation();
         $reservacion->user()->associate($request->input('user_id'));
-        $reservacion->iva = $reservacion->calc_iva($request->input('iva'));
-        $reservacion->total = $reservacion->calc_iva($request->input('total'));
+        $reservacion->iva = $reservacion->calc_iva();
+        $reservacion->total = $reservacion->calc_total();
         if ($reservacion->save()) {
-            $reservacion->tickets()->attach(
+            $reservacion->tickets()->attach([
                 $request->input('tickets') === null ?
-                    [] : $request->input('tickets')
+                    [] : $request->input('tickets') => ['cantidad' => $request->input('cantidad')]]
+                // $request->input('tickets') === null ?
+                //     [] : $request->input('tickets')
             );
             $reservacion->products()->attach(
                 $request->input('products') === null ?
