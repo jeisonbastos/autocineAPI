@@ -100,7 +100,6 @@ class ProductController extends Controller
                 'tamano_presentacion' => 'required',
                 'precio' => 'required',
                 'puntuacion' => 'required|min:0',
-                'classification_id' => 'required|numeric|min:1',
                 'imagenURL' => 'nullable'
             ]);
             //Obtener el usuario autenticado actual
@@ -120,8 +119,8 @@ class ProductController extends Controller
         $product->puntuacion = $request->input('puntuacion');
         $product->imagenURL = $request->input('imagenURL');
 
-        if ($product->update()) {
-            $product->classifications()->sync(
+        if ($product->save()) {
+            $product->classifications()->attach(
                 $request->input('classifications') === null ?
                     [] : $request->input('classifications')
             );
@@ -173,7 +172,6 @@ class ProductController extends Controller
                 'tamano_presentacion' => 'required',
                 'precio' => 'required',
                 'puntuacion' => 'required|min:0',
-                'classification_id' => 'required|numeric|min:1',
                 'imagenURL' => 'nullable'
             ]);
             //Obtener el usuario autenticado actual
