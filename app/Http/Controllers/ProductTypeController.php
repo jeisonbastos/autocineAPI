@@ -21,7 +21,7 @@ class ProductTypeController extends Controller
     public function index()
     {
         try {
-            $tipos_producto = ProductType::orderBy('nombre', 'desc')->with(['products'])->get();
+            $tipos_producto = ProductType::orderBy('nombre')->with(['products'])->get();
             $response = $tipos_producto;
 
             return response()->json($response, 200);

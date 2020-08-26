@@ -128,7 +128,7 @@ class ReservationController extends Controller
         if ($reservacion->save()) {
             $reservacion->tickets()->attach([
                 $request->input('tickets') === null ?
-                    [] : $request->input('tickets') => ['cantidad' => $request->input('cantidad')]]
+                    [] : $request->input('tickets') => ['cantidad' => $request->input('tickets.pivot.cantidad')]]
                 // $request->input('tickets') === null ?
                 //     [] : $request->input('tickets')
             );

@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->decimal('precio');
             $table->string('imagenURL');
             $table->decimal('puntuacion')->default(0);
+            $table->boolean('habilitada', false);
             $table->timestamps();
             #foreign keys
             $table->foreign('product_type_id')->references('id')->on('product_types');
